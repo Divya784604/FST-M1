@@ -1,21 +1,29 @@
-package Activities;
+package demo;
 
-public class Activity2 {
-    public static void main(String[] args) {
-        // Initialize array
-        int[] numbers = {10, 77, 10, 54, -11, 10};
-        int targetNumber = 10;
-        int expectedSum = 30;
-        int sum = 0;
-        for (int num : numbers) {
-            if (num == targetNumber) {
-                sum += num;
-            }
-        }
-        if (sum == expectedSum) {
-            System.out.println("true");
-        } else {
-            System.out.println("false");
-        }
-    }
-}
+
+	import org.junit.jupiter.api.Test;
+	import demo.BankAccount;
+	import demo.NotEnoughFundsException;
+	import static org.junit.jupiter.api.Assertions.*;
+	
+	public class Activity2 {
+	 
+	    @Test
+	    void notEnoughFunds() {
+	        // Create an object for BankAccount class
+	        BankAccount account = new BankAccount(9);
+	 
+	        // Assertion for exception
+	        assertThrows(NotEnoughFundsException.class, () -> account.withdraw(10),
+	                "Balance must be greater than amount of withdrawal");
+	    }
+	 
+	    @Test
+	    void enoughFunds() {
+	        // Create an object for BankAccount class
+	        BankAccount account = new BankAccount(100);
+	    
+	        // Assertion for no exceptions
+	        assertDoesNotThrow(() -> account.withdraw(100));
+	    }
+	}
